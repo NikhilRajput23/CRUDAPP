@@ -58,7 +58,8 @@ CRUD-APP
 ### ➕ Create User
 Users can add a new user by filling the form with name, email, phone number, and image.
 
-![Add User Screenshot](./screenshots/add-user.png)
+![Add User Screenshot]<img width="1919" height="1025" alt="image" src="https://github.com/user-attachments/assets/e3cc5fec-6880-4105-88c5-5345f7a435fd" />
+
 
 ---
 
@@ -125,4 +126,5 @@ Pagination & Search
 REST API version
 
 Deployment on cloud (Render / Railway)
+
 
