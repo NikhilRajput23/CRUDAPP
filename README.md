@@ -1,5 +1,5 @@
 # CRUDAPP
-
+            
 # CRUD Application (Node.js + Express + MongoDB)
 
 A simple **CRUD (Create, Read, Update, Delete)** web application built using **Node.js, Express.js, MongoDB, and EJS**.  
@@ -66,21 +66,24 @@ Users can add a new user by filling the form with name, email, phone number, and
 ### 📖 Read Users
 Displays the list of all users stored in the MongoDB database.
 
-![User List Screenshot](./screenshots/user-list.png)
+![User List Screenshot] <img width="1919" height="967" alt="image" src="https://github.com/user-attachments/assets/40b67a29-93f9-4266-b264-87659d31e1fd" />
+
 
 ---
 
 ### ✏️ Update User
 Edit existing user details using the edit form.
 
-![Edit User Screenshot](./screenshots/edit-user.png)
+![Edit User Screenshot]<img width="1919" height="971" alt="image" src="https://github.com/user-attachments/assets/61c8e6a7-efb9-4ad8-aae7-319c9e417ee5" />
+
 
 ---
 
 ### ❌ Delete User
 Delete a user with confirmation to avoid accidental deletion.
 
-![Delete User Screenshot](./screenshots/delete-user.png)
+![Delete User Screenshot]<img width="1898" height="859" alt="image" src="https://github.com/user-attachments/assets/14627f86-6b4f-474d-a536-66ef1d037f5c" />
+
 
 ---
 
@@ -126,5 +129,6 @@ Pagination & Search
 REST API version
 
 Deployment on cloud (Render / Railway)
+
 
 
