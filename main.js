@@ -1,59 +1,53 @@
-// imports
-const path = require('path');
-const result = require('dotenv').config({ path: './.env' });
+// ===== Imports =====
+const express = require("express");
+const path = require("path");
+const methodOverride = require("method-override");
+const session = require("express-session");
+const dotenv = require("dotenv");
+const mongoConfig = require("./config/mongoConfig");
 
-console.log('dotenv configuration loaded:', result); // Log to confirm dotenv is loaded
+// ===== Load env =====
+dotenv.config();
 
-const express = require('express');
-const methodOverride = require('method-override');
-const session = require('express-session');
-const mongoConfig = require('./config/mongoConfig');
+// ===== App init =====
+const app = express();
 
-const app = express(); // Initialize the app
-app.set('views', path.join(__dirname, 'views')); // Set the views directory
+// ===== View engine =====
+app.set("views", path.join(__dirname, "views"));
+app.set("view engine", "ejs");
 
-console.log('MONGO_URL:', process.env.MONGO_URL); // Log the specific MongoDB connection string
-
-// Connect to MongoDB
-mongoConfig();
-
-// Middleware
+// ===== Middleware =====
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(methodOverride('_method')); // Use method-override for forms
-app.use(session({
-    secret: process.env.SESSION_SECRET,
-    resave: true,
+app.use(methodOverride("_method"));
+
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET || "secret",
+    resave: false,
     saveUninitialized: true,
-    cookie: { secure: false }
-}));
+  })
+);
 
+// Flash message middleware
 app.use((req, res, next) => {
-    res.locals.message = req.session.message;
-    delete req.session.message;
-    next();
+  res.locals.message = req.session.message;
+  delete req.session.message;
+  next();
 });
 
-app.use(express.static('public/uploads'));
+// Static files
+app.use(express.static(path.join(__dirname, "public")));
 
-// Set view engine
-app.set('view engine', 'ejs');
+// ===== MongoDB connect =====
+mongoConfig();
 
-// Routes
-app.use("", require("./routes/routes"));
+// ===== Routes =====
+app.use("/", require("./routes/routes"));
 
-const PORT = process.env.PORT || 3000;
+// ===== Server start (IMPORTANT FIX FOR RENDER) =====
+const PORT = process.env.PORT || 8080;
 
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-});
-
-app.on('error', (err) => {
-    if (err.code === 'EADDRINUSE') {
-        console.error(`Port ${PORT} is already in use. Please free the port or change the PORT environment variable.`);
-        process.exit(1);
-    } else {
-        console.error('Server error:', err);
-        process.exit(1);
-    }
+app.listen(PORT, "0.0.0.0", () => {
+  console.log(`Server is running on port ${PORT}`);
 });
